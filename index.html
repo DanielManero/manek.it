@@ -1,140 +1,698 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>MANEK - Consulenza IT e Automazione</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0F172A" />
+  <title>MANEK Systems — IT, Automazioni e AI per le PMI</title>
+  <meta name="description" content="MANEK Systems: IT, Automazioni e AI per le PMI. Quick Audit gratuito in sede (Torino e provincia), pacchetti chiari e soluzioni concrete." />
+
+  <!-- Favicons / App icons (files in root repo) -->
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="favicon-256.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MANEK Systems — IT, Automazioni e AI per le PMI" />
+  <meta property="og:description" content="Soluzioni IT, sicurezza e automazioni pratiche per PMI. Quick Audit gratuito in sede." />
+  <meta property="og:type" content="website" />
+
   <style>
-    :root {
-      --primary: #00ffff;
-      --bg: #0e0e0e;
-      --text: #f5f5f5;
-      --muted: #aaaaaa;
+    :root{
+      --navy:#0F172A;
+      --blue:#1D4ED8;
+      --gray:#475569;
+      --bg:#F8FAFC;
+      --card:#FFFFFF;
+      --line:#E5E7EB;
+      --ok:#10B981;
+
+      --radius:18px;
+      --shadow: 0 12px 30px rgba(15,23,42,.10);
+      --shadow2: 0 8px 18px rgba(15,23,42,.12);
+      --container: 1120px;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--navy);
+      background:
+        radial-gradient(1200px 500px at 30% -10%, rgba(29,78,216,.18), transparent 60%),
+        radial-gradient(900px 400px at 80% 10%, rgba(16,185,129,.10), transparent 60%),
+        var(--bg);
+      line-height:1.55;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--container); margin:0 auto; padding:0 18px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(248,250,252,.72);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(229,231,235,.8);
     }
-    header {
-      background-color: #1a1a1a;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
     }
-    header h1 {
-      font-size: 2.5em;
-      color: var(--primary);
-      letter-spacing: 2px;
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
     }
-    nav a {
-      color: var(--muted);
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s ease;
+    .brandText{display:flex; flex-direction:column; line-height:1.1}
+    .brandText strong{font-size:14px; letter-spacing:.4px}
+    .brandText span{font-size:12px; color:var(--gray)}
+
+    nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      font-size:13px; color:var(--gray);
+      padding:8px 10px; border-radius:10px;
     }
-    nav a:hover {
-      color: var(--primary);
+    nav a:hover{background:rgba(29,78,216,.08); color:var(--navy)}
+
+    .ctaRow{display:flex; gap:10px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(15,23,42,.06);
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+      user-select:none;
     }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 8px 18px rgba(15,23,42,.10)}
+    .btn.primary{
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      border-color: rgba(29,78,216,.25);
+      color:#fff;
     }
-    h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      color: var(--primary);
+    .btn.ghost{background: transparent}
+
+    /* Hero */
+    .hero{padding: 54px 0 22px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
     }
-    ul {
-      padding-left: 20px;
+    .heroCard{
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(229,231,235,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      position:relative;
+      overflow:hidden;
     }
-    li {
+    .heroCard:after{
+      content:"";
+      position:absolute;
+      width:420px; height:420px;
+      right:-260px; top:-240px;
+      background: radial-gradient(circle at 30% 30%, rgba(29,78,216,.22), transparent 58%);
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(29,78,216,.10);
+      color: var(--blue);
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+    .subhead{
+      margin:0;
+      color: var(--gray);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+    .heroActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 18px;
+    }
+    .miniStats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:10px;
+      margin-top: 18px;
+    }
+    .stat{
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .stat strong{display:block; font-size:14px}
+    .stat span{display:block; font-size:12px; color:var(--gray)}
+
+    .sideCard{
+      background: rgba(15,23,42,.96);
+      color:#fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .sideCard h3{margin:0 0 8px; font-size:16px}
+    .sideCard p{margin:0 0 14px; color: rgba(255,255,255,.78); font-size:13px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      font-size:12px;
+      margin: 6px 6px 0 0;
+    }
+    .pill b{color:#fff}
+
+    section{padding: 34px 0}
+    .sectionHead{margin-bottom: 16px}
+    .sectionHead h2{margin:0; font-size: 24px; letter-spacing: -.5px}
+    .sectionHead p{margin:6px 0 0; color: var(--gray); font-size: 14px; max-width: 78ch}
+
+    .grid3{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px}
+    .grid2{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px}
+    .card{
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(229,231,235,.95);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(15,23,42,.07);
+      padding: 16px;
+      transition: transform .15s ease;
+    }
+    .card:hover{transform: translateY(-2px)}
+    .tag{
+      display:inline-flex; align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color: var(--gray);
+      background: #fff;
+      font-size:12px;
+      font-weight:800;
       margin-bottom: 10px;
     }
-    .contact p {
-      margin: 10px 0;
+    .tag.blue{border-color: rgba(29,78,216,.25); background: rgba(29,78,216,.08); color: var(--blue)}
+    .list{margin: 10px 0 0; padding-left: 18px; color: var(--gray); font-size: 13px}
+    .list li{margin: 6px 0}
+
+    /* Audit banner */
+    .auditBanner{
+      background: linear-gradient(135deg, rgba(29,78,216,.12), rgba(15,23,42,.02));
+      border:1px solid rgba(29,78,216,.20);
+      border-radius: var(--radius);
+      padding: 18px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+      align-items:center;
     }
-    .cta {
-      margin-top: 40px;
-      text-align: center;
+    .auditRules{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
     }
-    .cta a {
-      background-color: var(--primary);
-      color: #000;
-      padding: 12px 25px;
-      font-weight: bold;
-      border-radius: 5px;
-      text-decoration: none;
-      box-shadow: 0 0 10px var(--primary);
+    .auditRules ul{margin:0; padding-left:18px; color:var(--gray); font-size:13px}
+    .auditRules li{margin:6px 0}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.92);
     }
-    footer {
-      text-align: center;
-      padding: 30px 15px;
-      background-color: #1a1a1a;
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 40px;
+    details + details{margin-top:10px}
+    summary{cursor:pointer; font-weight:900; color: var(--navy); list-style:none}
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--gray); font-size:13px}
+
+    footer{
+      padding: 28px 0 34px;
+      border-top: 1px solid rgba(229,231,235,.9);
+      background: rgba(248,250,252,.7);
     }
-    @media(max-width: 600px) {
-      header h1 {
-        font-size: 1.8em;
-      }
-      nav a {
-        display: block;
-        margin: 10px 0;
-      }
+    .smallText{color:var(--gray); font-size:12px}
+
+    /* Floating WhatsApp */
+    .waFloat{
+      position:fixed; right: 16px; bottom: 16px; z-index: 60;
+      display:flex; gap:10px; align-items:center;
+    }
+    .waBtn{
+      border:0; border-radius: 999px;
+      padding: 12px 14px;
+      font-weight:900;
+      background: #25D366;
+      color:#0B2B17;
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      display:inline-flex; gap:10px; align-items:center;
+    }
+    .waHint{
+      display:none;
+      background: rgba(15,23,42,.92);
+      color:#fff;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow2);
+      max-width: 220px;
+    }
+    .waFloat:hover .waHint{display:block}
+
+    /* Animazioni eleganti */
+    @keyframes popIn { from {opacity:0; transform: translateY(14px);} to {opacity:1; transform: translateY(0);} }
+    .animate-in { animation: popIn .7s ease-out both; }
+    .delay-1 { animation-delay: .08s; }
+    .delay-2 { animation-delay: .16s; }
+    .delay-3 { animation-delay: .24s; }
+
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .logoFloat{ animation: floaty 3.2s ease-in-out infinite; }
+
+    @media (max-width: 920px){
+      .heroGrid{grid-template-columns: 1fr}
+      nav{display:none}
+      .grid3{grid-template-columns: 1fr}
+      .grid2{grid-template-columns: 1fr}
+      .auditBanner{grid-template-columns: 1fr}
+      h1{font-size: 34px}
+      .brand{min-width:auto}
     }
   </style>
 </head>
+
 <body>
+  <!-- CONFIG -->
+  <script>
+    const WA_NUMBER = "393203265716"; // 39 + numero, senza "+"
+    const WA_MESSAGE = encodeURIComponent("Ciao Daniel, sono [NOME]. Ti scrivo per MANEK Systems (IT, Automazioni e AI per le PMI). Vorrei fissare un Quick Audit.");
+    function waLink() { return `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`; }
+  </script>
 
-<header>
-  <h1>MANEK</h1>
-  <nav>
-    <a href="#servizi">Servizi</a>
-    <a href="#chi-sono">Chi sono</a>
-    <a href="#contatti">Contatti</a>
-  </nav>
-</header>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <!-- LOGO: file manek_logo_transparent.png nel root -->
+          <img src="manek_logo_transparent.png" alt="MANEK Systems" class="logoFloat"
+               style="width:38px;height:38px;border-radius:12px;object-fit:contain;box-shadow:var(--shadow2)">
+          <div class="brandText">
+            <strong>MANEK Systems</strong>
+            <span>IT, Automazioni e AI per le PMI</span>
+          </div>
+        </div>
 
-<section id="chi-sono">
-  <h2>Chi sono</h2>
-  <p>Sono Daniel Manero, consulente informatico e sviluppatore di soluzioni tecnologiche su misura. La mia missione è portare innovazione e automazione nelle aziende attraverso strumenti pratici, intelligenti e scalabili.</p>
-</section>
+        <nav>
+          <a href="#servizi">Servizi</a>
+          <a href="#audit">Quick Audit</a>
+          <a href="#pacchetti">Pacchetti</a>
+          <a href="#processo">Metodo</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contatti">Contatti</a>
+        </nav>
 
-<section id="servizi">
-  <h2>Servizi</h2>
-  <ul>
-    <li><i class="fas fa-robot"></i> Sviluppo bot e sistemi automatizzati (trading, IA, flussi di lavoro)</li>
-    <li><i class="fas fa-tools"></i> Consulenza informatica e assistenza tecnica</li>
-    <li><i class="fas fa-shield-alt"></i> Sicurezza e ottimizzazione infrastrutture</li>
-    <li><i class="fas fa-code"></i> Progettazione software su misura</li>
-  </ul>
-  <div class="cta">
-    <a href="mailto:info@manek.it">Richiedi una consulenza</a>
+        <div class="ctaRow">
+          <a class="btn ghost" href="#audit">Audit gratuito</a>
+          <a class="btn primary" id="btnTopWa" href="#" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
 
-<section id="contatti" class="contact">
-  <h2>Contatti</h2>
-  <p><i class="fas fa-envelope"></i> Email: <a href="mailto:info@manek.it" style="color: var(--primary);">info@manek.it</a></p>
-  <p><i class="fas fa-phone"></i> Telefono: +39 XXX XXX XXXX</p>
-  <p><i class="fas fa-map-marker-alt"></i> Sede: Via Castagnole 32, 10060 None (TO)</p>
-</section>
+  <header class="hero">
+    <div class="container">
+      <div class="heroGrid">
+        <div class="heroCard animate-in">
+          <div class="kicker">Driving Growth Beyond Just Solutions</div>
+          <h1>IT, Automazioni e AI <br/>per le PMI</h1>
+          <p class="subhead">
+            Supporto IT, sicurezza operativa e automazioni pratiche per aziende locali.
+            Soluzioni concrete, spiegate in modo semplice.
+          </p>
 
-<footer>
-  &copy; 2025 MANEK - P.IVA IT12345678901 | Tutti i diritti riservati
-</footer>
+          <div class="heroActions">
+            <a class="btn primary animate-in delay-1" id="btnHeroWa" href="#" rel="noopener">Prenota su WhatsApp</a>
+            <a class="btn animate-in delay-2" href="#pacchetti">Vedi i pacchetti</a>
+            <a class="btn animate-in delay-3" href="#audit">Quick Audit gratuito</a>
+          </div>
 
+          <div class="miniStats">
+            <div class="stat"><strong>Pratico</strong><span>Niente fuffa, solo risultati</span></div>
+            <div class="stat"><strong>Sicuro</strong><span>Backup, accessi, continuità</span></div>
+            <div class="stat"><strong>Scalabile</strong><span>Pacchetti chiari e replicabili</span></div>
+          </div>
+        </div>
+
+        <aside class="sideCard animate-in delay-1">
+          <h3>Contatti rapidi</h3>
+          <p><b>Daniel Manero</b> — Consulente IT & Automazione<br/>Torino e provincia</p>
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px">
+            <span class="pill"><b>Tel</b> +39 320 326 5716</span>
+            <span class="pill"><b>Email</b> daniel.manero@manek.it</span>
+            <span class="pill"><b>Web</b> www.manek.it</span>
+          </div>
+          <div style="margin-top:14px">
+            <a class="btn primary" id="btnSideWa" href="#" rel="noopener" style="width:100%">Scrivimi su WhatsApp</a>
+          </div>
+          <div style="margin-top:12px; color:rgba(255,255,255,.72); font-size:12px">
+            <b>Nota:</b> il Quick Audit è una valutazione rapida in sede (30 min). Nessun intervento tecnico durante l’audit.
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <section id="servizi">
+    <div class="container">
+      <div class="sectionHead">
+        <h2>Servizi</h2>
+        <p>4 aree semplici per PMI locali: continuità, sicurezza e riduzione del lavoro manuale.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="tag blue">IT Operativo</div>
+          <h3>Stabilità e supporto</h3>
+          <p>Postazioni, rete, email, utenti, troubleshooting.</p>
+          <ul class="list">
+            <li>PC lenti, Wi-Fi instabile, stampanti</li>
+            <li>Gestione account e accessi</li>
+            <li>Ordine su cartelle condivise</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag blue">Sicurezza & Continuità</div>
+          <h3>Backup e protezione</h3>
+          <p>Riduciamo il rischio di fermo: backup verificato e accessi protetti.</p>
+          <ul class="list">
+            <li>Backup + test ripristino reale</li>
+            <li>MFA email e gestione accessi</li>
+            <li>Igiene informatica (base, concreta)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag blue">Automazioni & AI Pratica</div>
+          <h3>Meno manualità</h3>
+          <p>Automazioni e AI utili su casi reali (email, documenti, procedure).</p>
+          <ul class="list">
+            <li>Email/allegati → cartelle → naming</li>
+            <li>Report automatici settimanali/mensili</li>
+            <li>AI come acceleratore (quando serve)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag blue">Software Operativo Light</div>
+          <h3>Strumenti “leggeri”</h3>
+          <p>Mini-soluzioni e dashboard senza progetti infiniti.</p>
+          <ul class="list">
+            <li>Scadenziari / registri operativi</li>
+            <li>Dashboard ordini/fatture/attività</li>
+            <li>Integrazioni leggere</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="audit">
+    <div class="container">
+      <div class="sectionHead">
+        <h2>Quick Audit gratuito in sede</h2>
+        <p>30 minuti in azienda (Torino e provincia) per capire rischi e priorità. Output: scheda sintetica + prossimo step.</p>
+      </div>
+
+      <div class="auditBanner">
+        <div>
+          <h3>Perché farlo</h3>
+          <p class="smallText" style="font-size:13px">
+            Nelle PMI i problemi più costosi arrivano all’improvviso: backup non testati, email non protette, rete instabile.
+            Con il Quick Audit capisci subito cosa sistemare prima.
+          </p>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <span class="tag blue">30 minuti</span>
+            <span class="tag">Gratuito</span>
+            <span class="tag">In sede</span>
+          </div>
+
+          <div style="margin-top:14px">
+            <a class="btn primary" id="btnAuditWa" href="#" rel="noopener">Prenota il Quick Audit</a>
+          </div>
+        </div>
+
+        <div class="auditRules">
+          <b>Regole chiare</b>
+          <ul>
+            <li>È una valutazione rapida: <b>nessun intervento tecnico</b> durante l’audit.</li>
+            <li>Controlliamo priorità: backup, email/accessi, rete/postazioni, dati.</li>
+            <li>Se serve intervenire: proposta con pacchetti chiari (START/SHIELD/FLOW).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pacchetti">
+    <div class="container">
+      <div class="sectionHead">
+        <h2>Pacchetti</h2>
+        <p>Dopo il Quick Audit, scegli il percorso più adatto. Strutturati, chiari e replicabili.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="tag blue">MANEK START</div>
+          <h3>IT Essentials Fix (una tantum)</h3>
+          <p>Mettiamo ordine e riduciamo i problemi quotidiani: rete, postazioni, email, condivisioni.</p>
+          <ul class="list">
+            <li>Fix priorità emerse dal Quick Audit</li>
+            <li>Ottimizzazione postazioni principali</li>
+            <li>Revisione rete/Wi-Fi e stampanti</li>
+            <li>Ordine account/email e condivisioni</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag blue">MANEK SHIELD</div>
+          <h3>Backup & Security (setup + canone)</h3>
+          <p>Continuità operativa: backup verificato, MFA email, controllo accessi e prevenzione.</p>
+          <ul class="list">
+            <li>Backup + test ripristino reale</li>
+            <li>MFA email e hardening base</li>
+            <li>Controlli periodici + report</li>
+            <li>Supporto con priorità</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag blue">MANEK FLOW</div>
+          <h3>Automazioni & Software Light (progetto)</h3>
+          <p>Riduciamo lavoro manuale e caos documentale con automazioni e strumenti leggeri.</p>
+          <ul class="list">
+            <li>Email/allegati → cartelle → naming</li>
+            <li>Report automatici + mini dashboard</li>
+            <li>AI pratica su casi reali</li>
+            <li>Formazione breve + checklist</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="smallText" style="margin-top:12px">
+        * Prezzi e scope vengono definiti dopo il Quick Audit, in base a dimensione e priorità reali.
+      </p>
+    </div>
+  </section>
+
+  <section id="processo">
+    <div class="container">
+      <div class="sectionHead">
+        <h2>Metodo di lavoro</h2>
+        <p>Approccio semplice: capire → sistemare → mantenere → migliorare. Sempre con priorità chiare.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card"><div class="tag">1) Quick Audit</div><h3>Priorità chiare</h3><p>Valutazione rapida in sede: rischi e azioni consigliate.</p></div>
+        <div class="card"><div class="tag">2) Piano d’azione</div><h3>Interventi mirati</h3><p>Pacchetti strutturati e tempi chiari. Niente progetti infiniti.</p></div>
+        <div class="card"><div class="tag">3) Crescita</div><h3>Ottimizzazione</h3><p>Quando l’IT è stabile, si passa a automazioni, report e AI pratica.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="sectionHead">
+        <h2>FAQ</h2>
+        <p>Risposte rapide alle domande tipiche delle PMI.</p>
+      </div>
+
+      <details><summary>Il Quick Audit è davvero gratuito?</summary>
+        <p>Sì. È una valutazione rapida in sede (30 minuti). Non include interventi tecnici. Se serve intervenire, proponiamo un pacchetto con tempi e costi chiari.</p>
+      </details>
+
+      <details><summary>Ho già un tecnico/fornitore: ha senso lo stesso?</summary>
+        <p>Sì. Il Quick Audit è una “second opinion” pratica: spesso emergono punti invisibili (backup non testati, MFA assente, permessi caotici). Se è tutto perfetto, te lo confermo.</p>
+      </details>
+
+      <details><summary>Fate anche software?</summary>
+        <p>Sì, ma “Software Operativo Light”: strumenti semplici e utili per controllo e processi (dashboard, scadenze, registri). Niente progetti infiniti.</p>
+      </details>
+
+      <details><summary>In quali zone operate?</summary>
+        <p>Torino e provincia (per audit in sede). Per supporto remoto, anche oltre.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="contatti">
+    <div class="container">
+      <div class="sectionHead">
+        <h2>Contatti</h2>
+        <p>Scrivimi su WhatsApp per fissare il Quick Audit o per una call conoscitiva.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>MANEK Systems</h3>
+          <p><b>Daniel Manero</b> — Consulente IT & Automazione<br/>Torino e provincia</p>
+          <ul class="list">
+            <li><b>Tel:</b> +39 320 326 5716</li>
+            <li><b>Email:</b> daniel.manero@manek.it</li>
+            <li><b>Sito:</b> www.manek.it</li>
+          </ul>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn primary" id="btnContactWa" href="#" rel="noopener">WhatsApp</a>
+            <a class="btn" href="mailto:daniel.manero@manek.it?subject=Richiesta%20informazioni%20MANEK%20Systems">Invia email</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Richiesta rapida</h3>
+          <p class="smallText">Compila e premi “Copia” per incollare su WhatsApp (zero form server).</p>
+
+          <div style="display:grid; gap:10px; margin-top:12px">
+            <label class="smallText">Nome</label>
+            <input id="fName" placeholder="Es. Marco Rossi" style="padding:12px;border:1px solid var(--line);border-radius:12px;font-size:14px"/>
+            <label class="smallText">Azienda</label>
+            <input id="fCompany" placeholder="Es. Rossi Srl" style="padding:12px;border:1px solid var(--line);border-radius:12px;font-size:14px"/>
+            <label class="smallText">Problema principale</label>
+            <input id="fProblem" placeholder="Es. backup, email, rete, lentezza PC, documenti..." style="padding:12px;border:1px solid var(--line);border-radius:12px;font-size:14px"/>
+            <button class="btn" id="btnCopyMsg" type="button">Copia messaggio per WhatsApp</button>
+            <div id="copyOk" class="smallText" style="display:none;color:var(--ok);font-weight:800">Copiato ✅ Apri WhatsApp e incolla.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; gap:12px; align-items:center">
+        <img src="manek_logo_transparent.png" alt="MANEK Systems" style="width:34px;height:34px;object-fit:contain">
+        <div>
+          <div style="font-weight:900">MANEK Systems</div>
+          <div class="smallText">Driving Growth Beyond Just Solutions</div>
+        </div>
+      </div>
+      <div class="smallText" style="margin-top:10px">
+        IT, Automazioni e AI per le PMI — Torino e provincia<br/>
+        Tel: +39 320 326 5716 • Email: daniel.manero@manek.it • www.manek.it<br/>
+        © <span id="year"></span> MANEK Systems.
+      </div>
+    </div>
+  </footer>
+
+  <div class="waFloat">
+    <div class="waHint">Scrivimi su WhatsApp per fissare il Quick Audit.</div>
+    <button class="waBtn" id="btnFloatWa" type="button" aria-label="Apri WhatsApp">
+      WhatsApp <span aria-hidden="true">↗</span>
+    </button>
+  </div>
+
+  <script>
+    // Wire WhatsApp buttons
+    const wa = waLink();
+    for (const id of ["btnTopWa","btnHeroWa","btnSideWa","btnAuditWa","btnContactWa"]) {
+      const el = document.getElementById(id);
+      if (el) el.href = wa;
+    }
+    document.getElementById("btnFloatWa").addEventListener("click", () => window.open(wa, "_blank"));
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Copy message helper
+    const ok = document.getElementById("copyOk");
+    document.getElementById("btnCopyMsg").addEventListener("click", async () => {
+      const name = (document.getElementById("fName").value || "[NOME]").trim();
+      const company = (document.getElementById("fCompany").value || "[AZIENDA]").trim();
+      const problem = (document.getElementById("fProblem").value || "[PROBLEMA]").trim();
+      const msg = `Ciao Daniel, sono ${name} di ${company}. Ti scrivo per MANEK Systems. Vorrei fissare un Quick Audit. Problema principale: ${problem}.`;
+      try{
+        await navigator.clipboard.writeText(msg);
+        ok.style.display = "block";
+        setTimeout(() => ok.style.display = "none", 3500);
+      }catch(e){
+        alert("Non riesco a copiare automaticamente. Copia manualmente questo testo:\n\n" + msg);
+      }
+    });
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href");
+        if (!href || href === "#") return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
+
+    // Reveal on scroll
+    const els = document.querySelectorAll(".card, .auditBanner, details, footer, .sideCard");
+    els.forEach(el => el.classList.add("reveal"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("show"); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
